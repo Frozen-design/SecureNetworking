@@ -1,24 +1,64 @@
-import asyncio
-from localtunnel.tunnel_manager import TunnelManager
+import secrets
+
+import trio
+
+from libp2p import (
+    new_host,
+)
+from libp2p.crypto.secp256k1 import (
+    create_new_key_pair,
+)
+from libp2p.crypto.x25519 import create_new_key_pair as create_new_x25519_key_pair
+from libp2p.security.noise.transport import (
+    PROTOCOL_ID as NOISE_PROTOCOL_ID,
+    Transport as NoiseTransport,
+)
+from libp2p.utils.address_validation import (
+    get_available_interfaces,
+    get_optimal_binding_address,
+)
 
 class Server:
     def __init__(self) -> None:
         pass
 
+
 async def main():
-    manager = TunnelManager()
-    manager.add_tunnel(port = 7900, subdomain="test")
+    # Create a key pair for the host
+    secret = secrets.token_bytes(32)
+    key_pair = create_new_key_pair(secret)
+    noise_key_pair = create_new_x25519_key_pair()
 
-    try:
-        await manager.open_all()
-        for tunnel in manager.tunnels:
-            print(f"Tunnel open at URL: {tunnel.get_tunnel_url()}")
+    # Create a Noise security transport
+    noise_transport = NoiseTransport(
+        # libp2p_keypair: libp2p identity (distinct from the Noise static key per spec)
+        libp2p_keypair=key_pair,
+        # noise_privkey: X25519 static key for Noise DH (libp2p Noise spec)
+        noise_privkey=noise_key_pair.private_key,
+        # early_data: Optional data to send during the handshake
+        # (None means no early data)
+        early_data=None,
+    )
 
-        # Keep running
-        await asyncio.Event().wait()
-    finally:
-        await manager.close_all()
-    pass
+    # Create a security options dictionary mapping protocol ID to transport
+    security_options = {NOISE_PROTOCOL_ID: noise_transport}
 
-if __name__ == "__main__":
-    asyncio.run(main())
+    # Create a host with the key pair, Noise security, and mplex multiplexer
+    host = new_host(key_pair=key_pair, sec_opt=security_options)
+
+    # Configure the listening address using the new paradigm
+    port = 7900
+    listen_addrs = get_available_interfaces(port)
+    optimal_addr = get_optimal_binding_address(port)
+
+    # Start the host
+    async with host.run(listen_addrs=listen_addrs):
+        print("libp2p has started")
+        print("libp2p is listening on:", host.get_addrs())
+        print(f"Optimal address: {optimal_addr}")
+        # Keep the host running
+        await trio.sleep_forever()
+
+
+# Run the async function
+trio.run(main)
