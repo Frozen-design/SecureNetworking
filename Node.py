@@ -126,7 +126,8 @@ async def run(port: int, destination: str) -> None:
     else:
         host = new_host(key_pair=key_pair, sec_opt=security_options)
     listen_addrs = get_available_interfaces(port)
-    listen_addrs.append(multiaddr.Multiaddr(f"/ip4/{get_external_ip()}/tcp/{port}"))
+    external_ip_addr = get_external_ip()
+    listen_addrs.append(multiaddr.Multiaddr(f"/ip4/{external_ip_addr}/tcp/{port}"))
     #host = new_host()
     async with host.run(listen_addrs=listen_addrs), trio.open_nursery() as nursery:
         # Start the peer-store cleanup task
@@ -147,14 +148,17 @@ async def run(port: int, destination: str) -> None:
             for addr in all_addrs:
                 print(f"{addr}")
 
-            print(f"public address: /ip4/{get_external_ip()}/tcp/{port}"+ f"/p2p/{host.get_id().to_string()}")
+            print(f"public address:")
+            public_multi_addr = f"/ip4/{external_ip_addr}/tcp/{port}"+ f"/p2p/{host.get_id().to_string()}"
+            print(public_multi_addr)
 
             # Use optimal address for the client command
             optimal_addr = get_optimal_binding_address(port)
             optimal_addr_with_peer = f"{optimal_addr}"[1:] + f"/p2p/{host.get_id().to_string()}"
             print(
                 f"\nRun this from the same folder in another console:\n\n"
-                f"python Server.py -d {optimal_addr_with_peer}\n"
+                f"Lan: \npython Node.py -d {optimal_addr_with_peer}\n"
+                f"UPnP: \npython Node.py -d {public_multi_addr[1:]}"
             )
             print("Waiting for incoming connection...")
 
