@@ -1,0 +1,845 @@
+('Z:\\Desktop\\Github personal projects\\SecureNetworking\\dist\\Node.exe',
+ True,
+ False,
+ False,
+ 'z:\\Desktop\\Github personal '
+ 'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\PyInstaller\\bootloader\\images\\icon-console.ico',
+ None,
+ False,
+ False,
+ b'<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<assembly xmlns='
+ b'"urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">\n  <trustInfo x'
+ b'mlns="urn:schemas-microsoft-com:asm.v3">\n    <security>\n      <requested'
+ b'Privileges>\n        <requestedExecutionLevel level="asInvoker" uiAccess='
+ b'"false"/>\n      </requestedPrivileges>\n    </security>\n  </trustInfo>\n  '
+ b'<compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">\n    <'
+ b'application>\n      <supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f'
+ b'0}"/>\n      <supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}"/>\n '
+ b'     <supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}"/>\n      <s'
+ b'upportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}"/>\n      <supporte'
+ b'dOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}"/>\n    </application>\n  <'
+ b'/compatibility>\n  <application xmlns="urn:schemas-microsoft-com:asm.v3">'
+ b'\n    <windowsSettings>\n      <longPathAware xmlns="http://schemas.micros'
+ b'oft.com/SMI/2016/WindowsSettings">true</longPathAware>\n    </windowsSett'
+ b'ings>\n  </application>\n  <dependency>\n    <dependentAssembly>\n      <ass'
+ b'emblyIdentity type="win32" name="Microsoft.Windows.Common-Controls" version='
+ b'"6.0.0.0" processorArchitecture="*" publicKeyToken="6595b64144ccf1df" langua'
+ b'ge="*"/>\n    </dependentAssembly>\n  </dependency>\n</assembly>',
+ True,
+ False,
+ None,
+ None,
+ None,
+ 'Z:\\Desktop\\Github personal '
+ 'projects\\SecureNetworking\\build\\Node\\Node.pkg',
+ [('pyi-contents-directory _internal', '', 'OPTION'),
+  ('PYZ-00.pyz',
+   'Z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\build\\Node\\PYZ-00.pyz',
+   'PYZ'),
+  ('struct',
+   'Z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\build\\Node\\localpycs\\struct.pyc',
+   'PYMODULE'),
+  ('pyimod01_archive',
+   'Z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\build\\Node\\localpycs\\pyimod01_archive.pyc',
+   'PYMODULE'),
+  ('pyimod02_importers',
+   'Z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\build\\Node\\localpycs\\pyimod02_importers.pyc',
+   'PYMODULE'),
+  ('pyimod03_ctypes',
+   'Z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\build\\Node\\localpycs\\pyimod03_ctypes.pyc',
+   'PYMODULE'),
+  ('pyimod04_pywin32',
+   'Z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\build\\Node\\localpycs\\pyimod04_pywin32.pyc',
+   'PYMODULE'),
+  ('pyiboot01_bootstrap',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\PyInstaller\\loader\\pyiboot01_bootstrap.py',
+   'PYSOURCE'),
+  ('pyi_rth_inspect',
+   'Z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_inspect.py',
+   'PYSOURCE'),
+  ('pyi_rth_cryptography_openssl',
+   'Z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\_pyinstaller_hooks_contrib\\rthooks\\pyi_rth_cryptography_openssl.py',
+   'PYSOURCE'),
+  ('pyi_rth_pkgutil',
+   'Z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pkgutil.py',
+   'PYSOURCE'),
+  ('pyi_rth_multiprocessing',
+   'Z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_multiprocessing.py',
+   'PYSOURCE'),
+  ('pyi_rth_setuptools',
+   'Z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_setuptools.py',
+   'PYSOURCE'),
+  ('Node',
+   'Z:\\Desktop\\Github personal projects\\SecureNetworking\\Node.py',
+   'PYSOURCE'),
+  ('python313.dll',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\python313.dll',
+   'BINARY'),
+  ('Crypto\\Cipher\\_raw_arc2.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Cipher\\_raw_arc2.pyd',
+   'BINARY'),
+  ('Crypto\\Cipher\\_raw_aes.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Cipher\\_raw_aes.pyd',
+   'BINARY'),
+  ('Crypto\\Cipher\\_chacha20.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Cipher\\_chacha20.pyd',
+   'BINARY'),
+  ('Crypto\\Cipher\\_raw_eksblowfish.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Cipher\\_raw_eksblowfish.pyd',
+   'BINARY'),
+  ('Crypto\\Hash\\_SHA224.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Hash\\_SHA224.pyd',
+   'BINARY'),
+  ('Crypto\\Hash\\_SHA256.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Hash\\_SHA256.pyd',
+   'BINARY'),
+  ('Crypto\\PublicKey\\_curve25519.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\PublicKey\\_curve25519.pyd',
+   'BINARY'),
+  ('Crypto\\PublicKey\\_ec_ws.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\PublicKey\\_ec_ws.pyd',
+   'BINARY'),
+  ('Crypto\\Cipher\\_raw_cbc.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Cipher\\_raw_cbc.pyd',
+   'BINARY'),
+  ('Crypto\\Hash\\_BLAKE2s.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Hash\\_BLAKE2s.pyd',
+   'BINARY'),
+  ('Crypto\\Hash\\_MD2.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Hash\\_MD2.pyd',
+   'BINARY'),
+  ('Crypto\\Cipher\\_raw_des.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Cipher\\_raw_des.pyd',
+   'BINARY'),
+  ('Crypto\\Hash\\_BLAKE2b.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Hash\\_BLAKE2b.pyd',
+   'BINARY'),
+  ('Crypto\\PublicKey\\_ed25519.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\PublicKey\\_ed25519.pyd',
+   'BINARY'),
+  ('Crypto\\Cipher\\_raw_cast.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Cipher\\_raw_cast.pyd',
+   'BINARY'),
+  ('Crypto\\Util\\_cpuid_c.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Util\\_cpuid_c.pyd',
+   'BINARY'),
+  ('Crypto\\Cipher\\_raw_des3.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Cipher\\_raw_des3.pyd',
+   'BINARY'),
+  ('Crypto\\Cipher\\_ARC4.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Cipher\\_ARC4.pyd',
+   'BINARY'),
+  ('Crypto\\Cipher\\_pkcs1_decode.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Cipher\\_pkcs1_decode.pyd',
+   'BINARY'),
+  ('Crypto\\Hash\\_SHA384.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Hash\\_SHA384.pyd',
+   'BINARY'),
+  ('Crypto\\Hash\\_SHA512.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Hash\\_SHA512.pyd',
+   'BINARY'),
+  ('Crypto\\Hash\\_RIPEMD160.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Hash\\_RIPEMD160.pyd',
+   'BINARY'),
+  ('Crypto\\Cipher\\_raw_cfb.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Cipher\\_raw_cfb.pyd',
+   'BINARY'),
+  ('Crypto\\Hash\\_keccak.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Hash\\_keccak.pyd',
+   'BINARY'),
+  ('Crypto\\Hash\\_MD5.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Hash\\_MD5.pyd',
+   'BINARY'),
+  ('Crypto\\Cipher\\_raw_blowfish.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Cipher\\_raw_blowfish.pyd',
+   'BINARY'),
+  ('Crypto\\Cipher\\_Salsa20.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Cipher\\_Salsa20.pyd',
+   'BINARY'),
+  ('Crypto\\Util\\_strxor.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Util\\_strxor.pyd',
+   'BINARY'),
+  ('Crypto\\Hash\\_MD4.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Hash\\_MD4.pyd',
+   'BINARY'),
+  ('Crypto\\Cipher\\_raw_aesni.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Cipher\\_raw_aesni.pyd',
+   'BINARY'),
+  ('Crypto\\PublicKey\\_curve448.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\PublicKey\\_curve448.pyd',
+   'BINARY'),
+  ('Crypto\\Hash\\_SHA1.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Hash\\_SHA1.pyd',
+   'BINARY'),
+  ('Crypto\\Hash\\_poly1305.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Hash\\_poly1305.pyd',
+   'BINARY'),
+  ('Crypto\\Cipher\\_raw_ecb.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Cipher\\_raw_ecb.pyd',
+   'BINARY'),
+  ('Crypto\\Cipher\\_raw_ocb.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Cipher\\_raw_ocb.pyd',
+   'BINARY'),
+  ('Crypto\\Cipher\\_raw_ofb.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Cipher\\_raw_ofb.pyd',
+   'BINARY'),
+  ('Crypto\\PublicKey\\_ed448.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\PublicKey\\_ed448.pyd',
+   'BINARY'),
+  ('Crypto\\Math\\_modexp.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Math\\_modexp.pyd',
+   'BINARY'),
+  ('Crypto\\Cipher\\_raw_ctr.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Cipher\\_raw_ctr.pyd',
+   'BINARY'),
+  ('Crypto\\Hash\\_ghash_portable.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Hash\\_ghash_portable.pyd',
+   'BINARY'),
+  ('Crypto\\Protocol\\_scrypt.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Protocol\\_scrypt.pyd',
+   'BINARY'),
+  ('Crypto\\Hash\\_ghash_clmul.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\Crypto\\Hash\\_ghash_clmul.pyd',
+   'BINARY'),
+  ('_decimal.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\DLLs\\_decimal.pyd',
+   'EXTENSION'),
+  ('_hashlib.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\DLLs\\_hashlib.pyd',
+   'EXTENSION'),
+  ('unicodedata.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\DLLs\\unicodedata.pyd',
+   'EXTENSION'),
+  ('_lzma.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\DLLs\\_lzma.pyd',
+   'EXTENSION'),
+  ('_bz2.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\DLLs\\_bz2.pyd',
+   'EXTENSION'),
+  ('_socket.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\DLLs\\_socket.pyd',
+   'EXTENSION'),
+  ('select.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\DLLs\\select.pyd',
+   'EXTENSION'),
+  ('_overlapped.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\DLLs\\_overlapped.pyd',
+   'EXTENSION'),
+  ('_ssl.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\DLLs\\_ssl.pyd',
+   'EXTENSION'),
+  ('_queue.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\DLLs\\_queue.pyd',
+   'EXTENSION'),
+  ('_ctypes.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\DLLs\\_ctypes.pyd',
+   'EXTENSION'),
+  ('_multiprocessing.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\DLLs\\_multiprocessing.pyd',
+   'EXTENSION'),
+  ('pyexpat.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\DLLs\\pyexpat.pyd',
+   'EXTENSION'),
+  ('_asyncio.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\DLLs\\_asyncio.pyd',
+   'EXTENSION'),
+  ('_wmi.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\DLLs\\_wmi.pyd',
+   'EXTENSION'),
+  ('cryptography\\hazmat\\bindings\\_rust.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\cryptography\\hazmat\\bindings\\_rust.pyd',
+   'EXTENSION'),
+  ('_cffi_backend.cp313-win_amd64.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\_cffi_backend.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('nacl\\_sodium.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\nacl\\_sodium.pyd',
+   'EXTENSION'),
+  ('google\\_upb\\_message.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\google\\_upb\\_message.pyd',
+   'EXTENSION'),
+  ('mmh3.cp313-win_amd64.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\mmh3.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('blake3\\blake3.cp313-win_amd64.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\blake3\\blake3.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('_uuid.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\DLLs\\_uuid.pyd',
+   'EXTENSION'),
+  ('psutil\\_psutil_windows.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\psutil\\_psutil_windows.pyd',
+   'EXTENSION'),
+  ('aioquic\\_buffer.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\aioquic\\_buffer.pyd',
+   'EXTENSION'),
+  ('aioquic\\_crypto.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\aioquic\\_crypto.pyd',
+   'EXTENSION'),
+  ('pylsqpack\\_binding.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\pylsqpack\\_binding.pyd',
+   'EXTENSION'),
+  ('coincurve\\_libsecp256k1.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\coincurve\\_libsecp256k1.pyd',
+   'EXTENSION'),
+  ('_sqlite3.pyd',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\DLLs\\_sqlite3.pyd',
+   'EXTENSION'),
+  ('81d243bd2c585b0f4821__mypyc.cp313-win_amd64.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\81d243bd2c585b0f4821__mypyc.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('charset_normalizer\\cd.cp313-win_amd64.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\charset_normalizer\\cd.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('charset_normalizer\\md.cp313-win_amd64.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\charset_normalizer\\md.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('miniupnpc.cp313-win_amd64.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\miniupnpc.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('lxml\\etree.cp313-win_amd64.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\lxml\\etree.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('lxml\\_elementpath.cp313-win_amd64.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\lxml\\_elementpath.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('lxml\\sax.cp313-win_amd64.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\lxml\\sax.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('lxml\\objectify.cp313-win_amd64.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\lxml\\objectify.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('lxml\\html\\diff.cp313-win_amd64.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\lxml\\html\\diff.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('lxml\\html\\_difflib.cp313-win_amd64.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\lxml\\html\\_difflib.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('lxml\\builder.cp313-win_amd64.pyd',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\lxml\\builder.cp313-win_amd64.pyd',
+   'EXTENSION'),
+  ('api-ms-win-crt-conio-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-crt-conio-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-crt-runtime-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-crt-runtime-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-crt-string-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-crt-string-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-crt-time-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-crt-time-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-crt-filesystem-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-crt-filesystem-l1-1-0.dll',
+   'BINARY'),
+  ('VCRUNTIME140.dll',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\VCRUNTIME140.dll',
+   'BINARY'),
+  ('api-ms-win-crt-process-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-crt-process-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-crt-stdio-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-crt-stdio-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-crt-heap-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-crt-heap-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-crt-convert-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-crt-convert-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-crt-locale-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-crt-locale-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-crt-math-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-crt-math-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-crt-environment-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-crt-environment-l1-1-0.dll',
+   'BINARY'),
+  ('libcrypto-3.dll',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\DLLs\\libcrypto-3.dll',
+   'BINARY'),
+  ('libssl-3.dll',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\DLLs\\libssl-3.dll',
+   'BINARY'),
+  ('libffi-8.dll',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\DLLs\\libffi-8.dll',
+   'BINARY'),
+  ('api-ms-win-crt-utility-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-crt-utility-l1-1-0.dll',
+   'BINARY'),
+  ('VCRUNTIME140_1.dll',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\VCRUNTIME140_1.dll',
+   'BINARY'),
+  ('api-ms-win-core-synch-l1-2-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-synch-l1-2-0.dll',
+   'BINARY'),
+  ('python3.dll',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\python3.dll',
+   'BINARY'),
+  ('sqlite3.dll',
+   'C:\\Program '
+   'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\DLLs\\sqlite3.dll',
+   'BINARY'),
+  ('miniupnpc-412215c0edfd50dd3a5f32d4f19265d3.dll',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\miniupnpc-412215c0edfd50dd3a5f32d4f19265d3.dll',
+   'BINARY'),
+  ('ucrtbase.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\ucrtbase.dll',
+   'BINARY'),
+  ('api-ms-win-core-profile-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-profile-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-timezone-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-timezone-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-processenvironment-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-processenvironment-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-namedpipe-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-namedpipe-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-debug-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-debug-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-sysinfo-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-sysinfo-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-heap-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-heap-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-file-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-file-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-processthreads-l1-1-1.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-processthreads-l1-1-1.dll',
+   'BINARY'),
+  ('api-ms-win-core-datetime-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-datetime-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-file-l2-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-file-l2-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-file-l1-2-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-file-l1-2-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-libraryloader-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-libraryloader-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-util-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-util-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-synch-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-synch-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-interlocked-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-interlocked-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-processthreads-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-processthreads-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-console-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-console-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-memory-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-memory-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-localization-l1-2-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-localization-l1-2-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-errorhandling-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-errorhandling-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-string-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-string-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-rtlsupport-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-rtlsupport-l1-1-0.dll',
+   'BINARY'),
+  ('api-ms-win-core-handle-l1-1-0.dll',
+   'C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance '
+   'Toolkit\\api-ms-win-core-handle-l1-1-0.dll',
+   'BINARY'),
+  ('cryptography-48.0.0.dist-info\\INSTALLER',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\cryptography-48.0.0.dist-info\\INSTALLER',
+   'DATA'),
+  ('cryptography-48.0.0.dist-info\\RECORD',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\cryptography-48.0.0.dist-info\\RECORD',
+   'DATA'),
+  ('cryptography-48.0.0.dist-info\\licenses\\LICENSE',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\cryptography-48.0.0.dist-info\\licenses\\LICENSE',
+   'DATA'),
+  ('cryptography-48.0.0.dist-info\\WHEEL',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\cryptography-48.0.0.dist-info\\WHEEL',
+   'DATA'),
+  ('cryptography-48.0.0.dist-info\\sboms\\sbom.json',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\cryptography-48.0.0.dist-info\\sboms\\sbom.json',
+   'DATA'),
+  ('cryptography-48.0.0.dist-info\\licenses\\LICENSE.APACHE',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\cryptography-48.0.0.dist-info\\licenses\\LICENSE.APACHE',
+   'DATA'),
+  ('cryptography-48.0.0.dist-info\\METADATA',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\cryptography-48.0.0.dist-info\\METADATA',
+   'DATA'),
+  ('cryptography-48.0.0.dist-info\\sboms\\cryptography-rust.cyclonedx.json',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\cryptography-48.0.0.dist-info\\sboms\\cryptography-rust.cyclonedx.json',
+   'DATA'),
+  ('cryptography-48.0.0.dist-info\\licenses\\LICENSE.BSD',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\cryptography-48.0.0.dist-info\\licenses\\LICENSE.BSD',
+   'DATA'),
+  ('importlib_metadata-9.0.0.dist-info\\INSTALLER',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\importlib_metadata-9.0.0.dist-info\\INSTALLER',
+   'DATA'),
+  ('importlib_metadata-9.0.0.dist-info\\METADATA',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\importlib_metadata-9.0.0.dist-info\\METADATA',
+   'DATA'),
+  ('importlib_metadata-9.0.0.dist-info\\top_level.txt',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\importlib_metadata-9.0.0.dist-info\\top_level.txt',
+   'DATA'),
+  ('importlib_metadata-9.0.0.dist-info\\WHEEL',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\importlib_metadata-9.0.0.dist-info\\WHEEL',
+   'DATA'),
+  ('importlib_metadata-9.0.0.dist-info\\RECORD',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\importlib_metadata-9.0.0.dist-info\\RECORD',
+   'DATA'),
+  ('importlib_metadata-9.0.0.dist-info\\licenses\\LICENSE',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\importlib_metadata-9.0.0.dist-info\\licenses\\LICENSE',
+   'DATA'),
+  ('setuptools\\_vendor\\jaraco\\text\\Lorem ipsum.txt',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\jaraco\\text\\Lorem '
+   'ipsum.txt',
+   'DATA'),
+  ('nacl\\py.typed',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\nacl\\py.typed',
+   'DATA'),
+  ('certifi\\cacert.pem',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\certifi\\cacert.pem',
+   'DATA'),
+  ('certifi\\py.typed',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\certifi\\py.typed',
+   'DATA'),
+  ('lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_dsdl_include.xsl',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_dsdl_include.xsl',
+   'DATA'),
+  ('lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\readme.txt',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\readme.txt',
+   'DATA'),
+  ('lxml\\isoschematron\\resources\\xsl\\RNG2Schtrn.xsl',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\lxml\\isoschematron\\resources\\xsl\\RNG2Schtrn.xsl',
+   'DATA'),
+  ('lxml\\isoschematron\\resources\\rng\\iso-schematron.rng',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\lxml\\isoschematron\\resources\\rng\\iso-schematron.rng',
+   'DATA'),
+  ('lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_schematron_skeleton_for_xslt1.xsl',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_schematron_skeleton_for_xslt1.xsl',
+   'DATA'),
+  ('lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_abstract_expand.xsl',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_abstract_expand.xsl',
+   'DATA'),
+  ('lxml\\isoschematron\\resources\\xsl\\XSD2Schtrn.xsl',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\lxml\\isoschematron\\resources\\xsl\\XSD2Schtrn.xsl',
+   'DATA'),
+  ('lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_schematron_message.xsl',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_schematron_message.xsl',
+   'DATA'),
+  ('lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_svrl_for_xslt1.xsl',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\lxml\\isoschematron\\resources\\xsl\\iso-schematron-xslt1\\iso_svrl_for_xslt1.xsl',
+   'DATA'),
+  ('dateutil\\zoneinfo\\dateutil-zoneinfo.tar.gz',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\dateutil\\zoneinfo\\dateutil-zoneinfo.tar.gz',
+   'DATA'),
+  ('attrs-26.1.0.dist-info\\METADATA',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\attrs-26.1.0.dist-info\\METADATA',
+   'DATA'),
+  ('trio-0.33.0.dist-info\\RECORD',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\trio-0.33.0.dist-info\\RECORD',
+   'DATA'),
+  ('trio-0.33.0.dist-info\\licenses\\LICENSE',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\trio-0.33.0.dist-info\\licenses\\LICENSE',
+   'DATA'),
+  ('libp2p-0.6.0.dist-info\\METADATA',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\libp2p-0.6.0.dist-info\\METADATA',
+   'DATA'),
+  ('trio-0.33.0.dist-info\\top_level.txt',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\trio-0.33.0.dist-info\\top_level.txt',
+   'DATA'),
+  ('trio-0.33.0.dist-info\\licenses\\LICENSE.MIT',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\trio-0.33.0.dist-info\\licenses\\LICENSE.MIT',
+   'DATA'),
+  ('attrs-26.1.0.dist-info\\INSTALLER',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\attrs-26.1.0.dist-info\\INSTALLER',
+   'DATA'),
+  ('libp2p-0.6.0.dist-info\\REQUESTED',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\libp2p-0.6.0.dist-info\\REQUESTED',
+   'DATA'),
+  ('service_identity-24.2.0.dist-info\\RECORD',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\service_identity-24.2.0.dist-info\\RECORD',
+   'DATA'),
+  ('libp2p-0.6.0.dist-info\\top_level.txt',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\libp2p-0.6.0.dist-info\\top_level.txt',
+   'DATA'),
+  ('libp2p-0.6.0.dist-info\\WHEEL',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\libp2p-0.6.0.dist-info\\WHEEL',
+   'DATA'),
+  ('libp2p-0.6.0.dist-info\\INSTALLER',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\libp2p-0.6.0.dist-info\\INSTALLER',
+   'DATA'),
+  ('trio-0.33.0.dist-info\\entry_points.txt',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\trio-0.33.0.dist-info\\entry_points.txt',
+   'DATA'),
+  ('trio-0.33.0.dist-info\\METADATA',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\trio-0.33.0.dist-info\\METADATA',
+   'DATA'),
+  ('attrs-26.1.0.dist-info\\WHEEL',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\attrs-26.1.0.dist-info\\WHEEL',
+   'DATA'),
+  ('libp2p-0.6.0.dist-info\\licenses\\LICENSE-MIT',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\libp2p-0.6.0.dist-info\\licenses\\LICENSE-MIT',
+   'DATA'),
+  ('attrs-26.1.0.dist-info\\RECORD',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\attrs-26.1.0.dist-info\\RECORD',
+   'DATA'),
+  ('libp2p-0.6.0.dist-info\\licenses\\LICENSE-APACHE',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\libp2p-0.6.0.dist-info\\licenses\\LICENSE-APACHE',
+   'DATA'),
+  ('trio-0.33.0.dist-info\\WHEEL',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\trio-0.33.0.dist-info\\WHEEL',
+   'DATA'),
+  ('attrs-26.1.0.dist-info\\licenses\\LICENSE',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\attrs-26.1.0.dist-info\\licenses\\LICENSE',
+   'DATA'),
+  ('service_identity-24.2.0.dist-info\\METADATA',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\service_identity-24.2.0.dist-info\\METADATA',
+   'DATA'),
+  ('libp2p-0.6.0.dist-info\\RECORD',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\libp2p-0.6.0.dist-info\\RECORD',
+   'DATA'),
+  ('service_identity-24.2.0.dist-info\\INSTALLER',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\service_identity-24.2.0.dist-info\\INSTALLER',
+   'DATA'),
+  ('trio-0.33.0.dist-info\\licenses\\LICENSE.APACHE2',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\trio-0.33.0.dist-info\\licenses\\LICENSE.APACHE2',
+   'DATA'),
+  ('trio-0.33.0.dist-info\\INSTALLER',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\trio-0.33.0.dist-info\\INSTALLER',
+   'DATA'),
+  ('service_identity-24.2.0.dist-info\\licenses\\LICENSE',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\service_identity-24.2.0.dist-info\\licenses\\LICENSE',
+   'DATA'),
+  ('service_identity-24.2.0.dist-info\\WHEEL',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\service_identity-24.2.0.dist-info\\WHEEL',
+   'DATA'),
+  ('libp2p-0.6.0.dist-info\\entry_points.txt',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\libp2p-0.6.0.dist-info\\entry_points.txt',
+   'DATA'),
+  ('base_library.zip',
+   'Z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\build\\Node\\base_library.zip',
+   'DATA')],
+ [],
+ False,
+ False,
+ 1780033378,
+ [('run.exe',
+   'z:\\Desktop\\Github personal '
+   'projects\\SecureNetworking\\.venv\\Lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\run.exe',
+   'EXECUTABLE')],
+ 'C:\\Program '
+ 'Files\\WindowsApps\\PythonSoftwareFoundation.Python.3.13_3.13.3568.0_x64__qbz5n2kfra8p0\\python313.dll')
