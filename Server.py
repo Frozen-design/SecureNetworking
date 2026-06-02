@@ -2,6 +2,23 @@ import socket
 import secrets
 import upnpclient
 import argparse
+from cryptography.hazmat.primitives.asymmetric import ec
+from cryptography.hazmat.primitives import hashes
+
+class Server:
+    def __init__(self, ipp, ip, protocol, port) -> None:
+        self.ip_protocol = ipp
+        self.ip = ip
+        self.protocol = protocol
+        self.port = port
+        # 1. Generate a private key using the SECP256R1 curve
+        self.private_key = ec.generate_private_key(ec.SECP256R1())
+        # 2. Extract the corresponding public key
+        self.public_key = self.private_key.public_key()
+        # 3. Sign a message
+        self.peer_id = self.private_key.sign(f"{self.public_key}".encode(), ec.ECDSA(hashes.SHA256()))
+        pass
+
 
 def get_local_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -22,7 +39,7 @@ def get_external_ip():
         return None
     return gw_addr
 
-def port_forward(external_port:int, internal_port:int, open_close:bool = False, duration = 60):
+def port_forward(external_port:int, internal_port:int, open_close:bool = True, duration = 60):
     open_close_str = "1" if open_close else "0"
     IP = get_local_ip()
     if IP == "127.0.0.1":
@@ -55,7 +72,7 @@ def write_data():
 def read_data():
     pass
 
-def run():
+def run(port, destination):
     pass
 
 def main():
