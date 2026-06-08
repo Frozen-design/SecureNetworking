@@ -1,16 +1,12 @@
 import socket 
-import secrets
+import asyncio
 import upnpclient
 import argparse
 from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives import hashes
 
-class Server:
-    def __init__(self, ipp, ip, protocol, port) -> None:
-        self.ip_protocol = ipp
-        self.ip = ip
-        self.protocol = protocol
-        self.port = port
+class Node:
+    def __init__(self) -> None:
         # 1. Generate a private key using the SECP256R1 curve
         self.private_key = ec.generate_private_key(ec.SECP256R1())
         # 2. Extract the corresponding public key
@@ -18,6 +14,46 @@ class Server:
         # 3. Sign a message
         self.peer_id = self.private_key.sign(f"{self.public_key}".encode(), ec.ECDSA(hashes.SHA256()))
         pass
+
+    async def handle_client(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter):
+        addr = writer.get_extra_info('peername')
+        print(f"Connection established with {addr}")
+        
+        while True:
+            # Read data asynchronously
+            data = await reader.read(1024)
+            if not data:
+                break  # Connection closed by client
+                
+            message = data.decode()
+            print(f"Received: {message}")
+            
+            # Send a response back if needed
+            writer.write(b"Data received successfully")
+            await writer.drain()
+            
+        print("Connection closed")
+        writer.close()
+        await writer.wait_closed()
+
+    async def start_node(self, port):
+        self.node = await asyncio.start_server(self.handle_client, '0.0.0.0', port)
+        addr = self.node.sockets[0].getsockname()
+        print(f"Serving on {addr}")
+
+        async with self.node:
+            await self.node.serve_forever()
+
+    async def recv_data(self, ip_p, ip, protocol, port):
+        self.ip_protocol = ip_p
+        self.ip = ip
+        self.protocol = protocol
+        self.port = port
+
+    async def send_data(self):
+        pass
+
+    
 
 
 def get_local_ip():

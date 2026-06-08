@@ -8,6 +8,7 @@ def parse_multiaddr(maddr):
     assert ip_type == "ip4", f"incorrectly formated ip type: {ip_type}"
     assert protocol == "tcp", f"{protocol} is not supported"
     assert 0 < port < 2**16, f"{port} not in range 0 to {2**16}"
+    return maddr_info
 
 def hash_data(data):
     return hashlib.sha256(data.encode()).hexdigest()
