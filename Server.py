@@ -2,22 +2,53 @@ import socket
 import asyncio
 import upnpclient
 import argparse
+import Helpers
 from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.kdf.hkdf import HKDF
+from cryptography.hazmat.primitives import serialization
 
-class Node:
+class Server:
     def __init__(self) -> None:
         # 1. Generate a private key using the SECP256R1 curve
         self.private_key = ec.generate_private_key(ec.SECP256R1())
         # 2. Extract the corresponding public key
         self.public_key = self.private_key.public_key()
+        self.public_key_bytes = self.public_key.public_bytes(serialization.Encoding.X962, serialization.PublicFormat.UncompressedPoint)
         # 3. Sign a message
-        self.peer_id = self.private_key.sign(f"{self.public_key}".encode(), ec.ECDSA(hashes.SHA256()))
-        pass
+        self.peer_id = Helpers.crypto_hash(self.public_key_bytes)
+        
+    # 1. Send Peer ID between client and server
+    # 2. Send public key between client and server
+    # 3. Verify public key 
+    # 4. Create shared secret
 
     async def handle_client(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter):
+        self.reader = reader
+        self.writer = writer
         addr = writer.get_extra_info('peername')
         print(f"Connection established with {addr}")
+
+        async def end_connection():
+            print("Connection closed")
+            writer.close()
+            await writer.wait_closed() 
+
+        writer.write(self.peer_id)
+        await writer.drain()
+        self.connection_peer_id = await reader.read(1024)
+        if not self.connection_peer_id:
+            await end_connection() # Connection closed by client
+            return
+        print(self.connection_peer_id)
+        
+        writer.write(self.public_key.public_bytes(serialization.Encoding.PEM, serialization.PublicFormat.SubjectPublicKeyInfo))
+        await writer.drain()
+        self.connection_public_key = await reader.read(1024)
+        if not self.connection_public_key:
+            await end_connection() # Connection closed by client
+            return
+        print(self.connection_public_key)
         
         while True:
             # Read data asynchronously
@@ -32,9 +63,7 @@ class Node:
             writer.write(b"Data received successfully")
             await writer.drain()
             
-        print("Connection closed")
-        writer.close()
-        await writer.wait_closed()
+        await end_connection()
 
     async def start_node(self, port):
         self.node = await asyncio.start_server(self.handle_client, '0.0.0.0', port)
@@ -44,11 +73,8 @@ class Node:
         async with self.node:
             await self.node.serve_forever()
 
-    async def recv_data(self, ip_p, ip, protocol, port):
-        self.ip_protocol = ip_p
-        self.ip = ip
-        self.protocol = protocol
-        self.port = port
+    async def recv_data(self):
+        pass
 
     async def send_data(self):
         pass
