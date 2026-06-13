@@ -3,6 +3,7 @@ import asyncio
 import upnpclient
 import argparse
 import Helpers
+import os
 from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.hkdf import HKDF
@@ -14,7 +15,7 @@ class Server:
         self.private_key = ec.generate_private_key(ec.SECP256R1())
         # 2. Extract the corresponding public key
         self.public_key = self.private_key.public_key()
-        self.public_key_bytes = self.public_key.public_bytes(serialization.Encoding.X962, serialization.PublicFormat.UncompressedPoint)
+        self.public_key_bytes = self.public_key.public_bytes(serialization.Encoding.X962, serialization.PublicFormat.CompressedPoint)
         # 3. Sign a message
         self.peer_id = Helpers.crypto_hash(self.public_key_bytes)
         
@@ -34,22 +35,62 @@ class Server:
             writer.close()
             await writer.wait_closed() 
 
+        # 1. Send peer ID for verification of connection
         writer.write(self.peer_id)
         await writer.drain()
+        # 1.5 Accept peer ID from connection
         self.connection_peer_id = await reader.read(1024)
         if not self.connection_peer_id:
-            await end_connection() # Connection closed by client
+            print("Peer did not send their peer id.")
+            await end_connection()
             return
         print(self.connection_peer_id)
         
+        # 2. Send actual public key for shared secret generation
         writer.write(self.public_key.public_bytes(serialization.Encoding.PEM, serialization.PublicFormat.SubjectPublicKeyInfo))
         await writer.drain()
-        self.connection_public_key = await reader.read(1024)
-        if not self.connection_public_key:
-            await end_connection() # Connection closed by client
+        # 2.5 Receive public key from connected peer
+        temp_holder = await reader.read(1024)
+        if not temp_holder:
+            print("Peer did not send their public key.")
+            await end_connection()
             return
+
+        # 3. Serialize public key recieved and verify public key is correct
         print(self.connection_public_key)
+        self.connection_public_key = serialization.load_pem_public_key(temp_holder)
+        if isinstance(self.connection_public_key, ec.EllipticCurvePublicKey):
+            # 4. Confirm hash of public key equals to the previously sent peer id of the person connecting
+            cpk_bytes = self.connection_public_key.public_bytes(serialization.Encoding.X962, serialization.PublicFormat.CompressedPoint)
+            cpk_hash = Helpers.crypto_hash(cpk_bytes)
+            if cpk_hash != self.peer_id:
+                print("Hash of peer public key isn't equal to peer id.")
+                await end_connection()
+                return
+            
+            # 5. Shared secret exchange
+            shared_secret = self.private_key.exchange(ec.ECDH(), self.connection_public_key)
+
+        else:
+            shared_secret = None
+            raise TypeError
         
+        # 6. Salt for the session, server generates and sends to client 
+        session_salt = os.urandom(32)
+        writer.write(session_salt)
+        await writer.drain()
+
+        # 6.5 Accept confirmation of salt
+        salt_confirmation = await reader.read(1024)
+        if not salt_confirmation and salt_confirmation != b'Salt received':
+            print("Salt not recieved by peer.")
+            await end_connection()
+            return
+        
+        # 7. Generate AES key to encrypt all messages
+        AES_key = HKDF(algorithm = hashes.SHA256(), length = 32, salt = session_salt, info=b'handshake data').derive(shared_secret)
+
+
         while True:
             # Read data asynchronously
             data = await reader.read(1024)
