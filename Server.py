@@ -9,7 +9,7 @@ from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 
 
-class Server:
+class Node:
     def __init__(self) -> None:
         # 1. Generate a private key using the SECP256R1 curve
         self.private_key = ec.generate_private_key(ec.SECP256R1())
@@ -47,24 +47,26 @@ class Server:
             await self.writer.wait_closed()
         except ConnectionError:
             pass
-
-    async def handle_client(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter):
-        self.reader, self.writer = reader, writer
-        addr = writer.get_extra_info('peername')
-        print(f"Connection established with {addr}")
+        finally:
+            return None
+    
+    async def handshake(self, is_server:bool = True) -> bytes | None:
         print("waiting on 1")
         # 1. Send peer ID for verification of connection
-        await self.write(self.peer_id)
-        # 1.5 Accept peer ID from connection
+        if is_server == True:
+            await self.write(self.peer_id)
         connection_peer_id = await self.read()
         if not connection_peer_id:
             return await self.end_connection("Peer did not send their peer id.")
+        if is_server != True:
+            await self.write(self.peer_id)
 
-        print(connection_peer_id)
+        print(connection_peer_id.hex())
         
         print("waiting on 2")
         # 2. Send actual public key for shared secret generation
-        await self.write(self.public_key.public_bytes(serialization.Encoding.PEM, serialization.PublicFormat.SubjectPublicKeyInfo))
+        if is_server == True:
+            await self.write(self.public_key.public_bytes(serialization.Encoding.PEM, serialization.PublicFormat.SubjectPublicKeyInfo))
         
         # 2.5 Receive public key from connected peer
         pk_holder = await self.read()
@@ -74,7 +76,6 @@ class Server:
         print("waiting on 3, 4, and 5")
         # 3. Serialize public key recieved and verify public key is correct
         connection_public_key = serialization.load_pem_public_key(pk_holder)
-        print(connection_public_key)
         if isinstance(connection_public_key, ec.EllipticCurvePublicKey):
             # 4. Confirm hash of public key equals to the previously sent peer id of the person connecting
             cpk_bytes = connection_public_key.public_bytes(serialization.Encoding.X962, serialization.PublicFormat.CompressedPoint)
@@ -88,21 +89,38 @@ class Server:
             shared_secret = None
             return await self.end_connection("type of connection public key is not an ecpk")
         
+        if is_server != True:
+            await self.write(self.public_key.public_bytes(serialization.Encoding.PEM, serialization.PublicFormat.SubjectPublicKeyInfo))
+        
         print("waiting on 6")
         # 6. Salt for the session, server generates and sends to client 
-        session_salt = os.urandom(32)
-        await self.write(session_salt)
+        if is_server == True:
+            session_salt = os.urandom(32)
+            await self.write(session_salt)
 
-        # 6.5 Accept confirmation of salt
-        salt_confirmation = await self.read()
-        if not salt_confirmation and salt_confirmation != b'Salt received':
-            return await self.end_connection("Salt not recieved by peer.")
+            # 6.5 Accept confirmation of salt
+            salt_confirmation = await self.read()
+            if not salt_confirmation and salt_confirmation != b'Salt received':
+                return await self.end_connection("Salt not recieved by peer.")
+        else:
+            session_salt = await self.read()
+            if not session_salt:
+                return await self.end_connection("session salt not sent")
+            await self.write(b'Salt received')
 
         print("waiting on 7")
         # 7. Generate AES key to encrypt all messages
         AES_key = HKDF(algorithm = hashes.SHA256(), length = 32, salt = session_salt, info=b'handshake data').derive(shared_secret)
-        
-        while True:
+        return AES_key
+
+
+    async def handle_client(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter):
+        self.reader, self.writer = reader, writer
+        addr = writer.get_extra_info('peername')
+        print(f"Connection established with {addr}")
+        AES_key = await self.handshake(is_server=True)
+        print("handshake finished")
+        '''while True:
             # Read data asynchronously
             data = await reader.read(1024)
             if not data:
@@ -113,13 +131,14 @@ class Server:
             
             # Send a response back if needed
             writer.write(b"Data received successfully")
-            await writer.drain()
-            
-        return await self.end_connection("Connection closing")
+            await writer.drain()'''
+        
+        await self.end_connection("Connection closing")
+        return
 
     async def start_node_as_server(self, port):
         try:
-            self.node = await asyncio.start_server(self.handle_client, '0.0.0.0', port)
+            self.node = await asyncio.start_server(self.handle_client, '127.0.0.1', port)
             addr = self.node.sockets[0].getsockname()
             print(f"Serving on {addr}")
 
@@ -143,45 +162,8 @@ class Server:
             return
         
         try:
-            #1
-            connection_peer_id = await self.read()
-            if not connection_peer_id:
-                await self.end_connection("Server did not send their peer id")
-                return
-            await self.write(self.peer_id)
-
-            # 2 Receive public key from connected peer
-            pk_holder = await self.read()
-            if not pk_holder:
-                return await self.end_connection("Peer did not send their public key.")
-
-            print("waiting on 3, 4, and 5")
-            # 3. Serialize public key recieved and verify public key is correct
-            connection_public_key = serialization.load_pem_public_key(pk_holder)
-            print(connection_public_key)
-            if isinstance(connection_public_key, ec.EllipticCurvePublicKey):
-                # 4. Confirm hash of public key equals to the previously sent peer id of the person connecting
-                cpk_bytes = connection_public_key.public_bytes(serialization.Encoding.X962, serialization.PublicFormat.CompressedPoint)
-                cpk_hash = Helpers.crypto_hash(cpk_bytes)
-                if cpk_hash != connection_peer_id:
-                    return await self.end_connection("Hash of peer public key isn't equal to peer id.")
-    
-                # 5. Shared secret exchange
-                shared_secret = self.private_key.exchange(ec.ECDH(), connection_public_key)
-            else:
-                shared_secret = None
-                return await self.end_connection("type of connection public key is not an ecpk")
-            
-            await self.write(self.public_key.public_bytes(serialization.Encoding.PEM, serialization.PublicFormat.SubjectPublicKeyInfo))
-
-            session_salt = await self.read()
-            if not session_salt:
-                return await self.end_connection("session salt not sent")
-            await self.write(b'Salt received')
-            
-            #7
-            AES_key = HKDF(algorithm = hashes.SHA256(), length = 32, salt = session_salt, info=b'handshake data').derive(shared_secret)
-
+            AES_key = await self.handshake(is_server = False)
+            print("handshake finished")
         except ConnectionError as e:
             print(f"Network error occurred: {e}")
         finally:
@@ -231,14 +213,16 @@ def port_forward(external_port:int, internal_port:int, open_close:bool = True, d
     except:
         print("port mapping already exists")
 
-def write_data():
-    pass
+async def create_node(port:int, destination:str):
+    if port <= 0:
+        port = 8000
+    node = Node()
+    if not destination:
+        await node.start_node_as_server(port)
+    else:
+        maddr_info = Helpers.parse_multiaddr(destination)
+        await node.start_node_as_client(maddr_info[1], int(maddr_info[3]))
 
-def read_data():
-    pass
-
-def run(port, destination):
-    pass
 
 def main():
     description = """
@@ -267,9 +251,12 @@ def main():
     args = parser.parse_args()
 
     try:
-        #trio.run(run, *(args.port, args.destination))
+        asyncio.run(create_node(args.port, args.destination))
         pass
     except KeyboardInterrupt:
-        
+        print("Program ending")
         pass
     pass
+
+if __name__ == "__main__":
+    main()
