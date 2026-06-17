@@ -41,7 +41,7 @@ def encrypt_aes_256(plaintext:str, AES_key:bytes) -> dict:
         }
     return payload_dict
 
-def payload_to_bytes(payload_dict:dict):
+def payload_to_bytes(payload_dict:dict) -> bytes:
     payload_hex = {
         "ciphertext": payload_dict["ciphertext"].hex(),
         "iv": payload_dict["iv"].hex(),

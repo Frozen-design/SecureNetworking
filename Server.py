@@ -4,6 +4,8 @@ import upnpclient
 import argparse
 import Helpers
 import os
+import sys
+import re
 from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.kdf.hkdf import HKDF
@@ -24,54 +26,54 @@ class Node:
     # 3. Verify public key 
     # 4. Create shared secret
 
-    async def write(self, data:bytes):
-        if self.writer != None:
-            self.writer.write(Helpers.gen_header(data) + data)
-            await self.writer.drain()
+    async def write(self, writer:asyncio.StreamWriter, data:bytes):
+        if writer != None:
+            writer.write(Helpers.gen_header(data) + data)
+            await writer.drain()
         else:
             raise Exception("Writer not initialized")
 
-    async def read(self) -> bytes:
-        if self.reader != None:
-            header = await self.reader.read(4)
+    async def read(self, reader:asyncio.StreamReader) -> bytes:
+        if reader != None:
+            header = await reader.read(4)
             length = Helpers.read_header(header)
-            return await self.reader.read(length)
+            return await reader.read(length)
         else:
             raise Exception("Reader not initialized")
         
-    async def end_connection(self, statement:str):
+    async def end_connection(self, writer, statement:str):
         print(statement)
         print("Connection closed")
-        self.writer.close()
+        writer.close()
         try:
-            await self.writer.wait_closed()
+            await writer.wait_closed()
         except ConnectionError:
             pass
         finally:
             return None
     
-    async def handshake(self, is_server:bool = True) -> bytes | None:
+    async def handshake(self, reader:asyncio.StreamReader, writer:asyncio.StreamWriter, is_server:bool = True) -> bytes | None:
         print("waiting on 1")
         # 1. Send peer ID for verification of connection
         if is_server == True:
-            await self.write(self.peer_id)
-        connection_peer_id = await self.read()
+            await self.write(writer, self.peer_id)
+        connection_peer_id = await self.read(reader)
         if not connection_peer_id:
-            return await self.end_connection("Peer did not send their peer id.")
+            return await self.end_connection(writer, "Peer did not send their peer id.")
         if is_server != True:
-            await self.write(self.peer_id)
+            await self.write(writer, self.peer_id)
 
         print(connection_peer_id.hex())
         
         print("waiting on 2")
         # 2. Send actual public key for shared secret generation
         if is_server == True:
-            await self.write(self.public_key.public_bytes(serialization.Encoding.PEM, serialization.PublicFormat.SubjectPublicKeyInfo))
+            await self.write(writer, self.public_key.public_bytes(serialization.Encoding.PEM, serialization.PublicFormat.SubjectPublicKeyInfo))
         
         # 2.5 Receive public key from connected peer
-        pk_holder = await self.read()
+        pk_holder = await self.read(reader)
         if not pk_holder:
-            return await self.end_connection("Peer did not send their public key.")
+            return await self.end_connection(writer, "Peer did not send their public key.")
 
         print("waiting on 3, 4, and 5")
         # 3. Serialize public key recieved and verify public key is correct
@@ -81,59 +83,95 @@ class Node:
             cpk_bytes = connection_public_key.public_bytes(serialization.Encoding.X962, serialization.PublicFormat.CompressedPoint)
             cpk_hash = Helpers.crypto_hash(cpk_bytes)
             if cpk_hash != connection_peer_id:
-                return await self.end_connection("Hash of peer public key isn't equal to peer id.")
+                return await self.end_connection(writer, "Hash of peer public key isn't equal to peer id.")
   
             # 5. Shared secret exchange
             shared_secret = self.private_key.exchange(ec.ECDH(), connection_public_key)
         else:
             shared_secret = None
-            return await self.end_connection("type of connection public key is not an ecpk")
+            return await self.end_connection(writer, "type of connection public key is not an ecpk")
         
         if is_server != True:
-            await self.write(self.public_key.public_bytes(serialization.Encoding.PEM, serialization.PublicFormat.SubjectPublicKeyInfo))
+            await self.write(writer,self.public_key.public_bytes(serialization.Encoding.PEM, serialization.PublicFormat.SubjectPublicKeyInfo))
         
         print("waiting on 6")
         # 6. Salt for the session, server generates and sends to client 
         if is_server == True:
             session_salt = os.urandom(32)
-            await self.write(session_salt)
+            await self.write(writer,session_salt)
 
             # 6.5 Accept confirmation of salt
-            salt_confirmation = await self.read()
+            salt_confirmation = await self.read(reader)
             if not salt_confirmation and salt_confirmation != b'Salt received':
-                return await self.end_connection("Salt not recieved by peer.")
+                return await self.end_connection(writer, "Salt not recieved by peer.")
         else:
-            session_salt = await self.read()
+            session_salt = await self.read(reader)
             if not session_salt:
-                return await self.end_connection("session salt not sent")
-            await self.write(b'Salt received')
+                return await self.end_connection(writer, "session salt not sent")
+            await self.write(writer, b'Salt received')
 
         print("waiting on 7")
         # 7. Generate AES key to encrypt all messages
         AES_key = HKDF(algorithm = hashes.SHA256(), length = 32, salt = session_salt, info=b'handshake data').derive(shared_secret)
         return AES_key
 
+    async def listen_to_server(self, reader:asyncio.StreamReader, AES_key):
+        """Continuously reads incoming chat text from the server and prints it."""
+        try:
+            while True:
+                payload = await self.read(reader)
+                data = Helpers.decrypt_aes_256(Helpers.bytes_to_payload(payload), AES_key)
+                if not data or data == '' or data == '\n':
+                    print("\n[DISCONNECTED] Connection closed by the server.")
+                    break
+                # Print the chat message received
+                print(data, end='', flush=True)
+        except asyncio.CancelledError:
+            pass
+
+    async def send_to_server(self, writer, AES_key):
+        """Reads input from local console stdin and ships it out to the server."""
+        # Run the blocking loop in an executor so it doesn't freeze the async event loop
+        loop = asyncio.get_running_loop()
+        
+        try:
+            while True:
+                # sys.stdin.readline() blocks, so we delegate it to a background thread
+                line = await loop.run_in_executor(None, sys.stdin.readline)
+                if not line: # EOF / Ctrl+D
+                    break
+                    
+                await self.write(writer, Helpers.payload_to_bytes(Helpers.encrypt_aes_256(f"[{self.username}]: " + line, AES_key)))
+        except asyncio.CancelledError:
+            pass
+
+    async def async_chat_function(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter, AES_key):
+        try:
+            print("[CONNECTED] Established link to chat server.")
+            print()
+            self.username = input("Enter a username: ").strip()
+            if len(self.username) > 20 or not re.match("^[a-zA-Z0-9]+$", self.username):
+                raise ValueError("Security alert: Invalid input detected!")
+            # Run both listening and sending coroutines concurrently
+            print(f"Welcome {self.username}")
+            await asyncio.gather(
+                self.listen_to_server(reader, AES_key),
+                self.send_to_server(writer, AES_key),
+                return_exceptions=True
+            )
+        except ConnectionRefusedError:
+            print("[ERROR] Could not connect. Is the server running?")
+        finally:
+            print("\n[INFO] Client session ended.")
 
     async def handle_client(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter):
-        self.reader, self.writer = reader, writer
+        #self.reader, self.writer = reader, writer
         addr = writer.get_extra_info('peername')
         print(f"Connection established with {addr}")
-        AES_key = await self.handshake(is_server=True)
+        AES_key = await self.handshake(reader, writer, is_server=True)
         print("handshake finished")
-        '''while True:
-            # Read data asynchronously
-            data = await reader.read(1024)
-            if not data:
-                break  # Connection closed by client
-                
-            message = data.decode()
-            print(f"Received: {message}")
-            
-            # Send a response back if needed
-            writer.write(b"Data received successfully")
-            await writer.drain()'''
-        
-        await self.end_connection("Connection closing")
+        await self.async_chat_function(reader, writer, AES_key)
+        await self.end_connection(writer, "Connection closing")
         return
 
     async def start_node_as_server(self, port):
@@ -141,6 +179,7 @@ class Node:
             self.node = await asyncio.start_server(self.handle_client, '127.0.0.1', port)
             addr = self.node.sockets[0].getsockname()
             print(f"Serving on {addr}")
+            print(f"multi-address: ip4/{addr[0]}/tcp/{addr[1]}/p2p/{self.peer_id.hex()}")
 
             async with self.node:
                 await self.node.serve_forever()
@@ -156,18 +195,19 @@ class Node:
 
     async def start_node_as_client(self, ip:str, port:int):
         try:
-            self.reader, self.writer = await asyncio.open_connection(ip, port)
+            reader, writer = await asyncio.open_connection(ip, port)
         except ConnectionRefusedError:
             print("Server is offline.")
             return
         
         try:
-            AES_key = await self.handshake(is_server = False)
+            AES_key = await self.handshake(reader, writer, is_server = False)
             print("handshake finished")
+            await self.async_chat_function(reader, writer, AES_key)
         except ConnectionError as e:
             print(f"Network error occurred: {e}")
         finally:
-            return await self.end_connection("Connection closing")
+            return await self.end_connection(writer, "Connection closing")
 
 def get_local_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
