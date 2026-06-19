@@ -115,7 +115,7 @@ class Node:
         AES_key = HKDF(algorithm = hashes.SHA256(), length = 32, salt = session_salt, info=b'handshake data').derive(shared_secret)
         return AES_key
 
-    async def listen_to_server(self, reader:asyncio.StreamReader, AES_key):
+    async def listen_to_peer(self, reader:asyncio.StreamReader, AES_key):
         """Continuously reads incoming chat text from the server and prints it."""
         try:
             while True:
@@ -129,7 +129,7 @@ class Node:
         except asyncio.CancelledError:
             pass
 
-    async def send_to_server(self, writer, AES_key):
+    async def send_to_peer(self, writer, AES_key):
         """Reads input from local console stdin and ships it out to the server."""
         # Run the blocking loop in an executor so it doesn't freeze the async event loop
         loop = asyncio.get_running_loop()
@@ -155,8 +155,8 @@ class Node:
             # Run both listening and sending coroutines concurrently
             print(f"Welcome {self.username}")
             await asyncio.gather(
-                self.listen_to_server(reader, AES_key),
-                self.send_to_server(writer, AES_key),
+                self.listen_to_peer(reader, AES_key),
+                self.send_to_peer(writer, AES_key),
                 return_exceptions=True
             )
         except ConnectionRefusedError:
