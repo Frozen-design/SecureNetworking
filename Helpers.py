@@ -29,10 +29,10 @@ def read_header(header:bytes) -> int:
     length = struct.unpack('>I', header)[0]
     return length
 
-def encrypt_aes_256(plaintext:str, AES_key:bytes) -> dict:
+def encrypt_aes_256(plaintext:bytes, AES_key:bytes) -> dict:
     iv = os.urandom(12)
     encyptor = Cipher(algorithms.AES256(AES_key), modes.GCM(iv)).encryptor()
-    ciphertext = encyptor.update(plaintext.encode()) + encyptor.finalize()
+    ciphertext = encyptor.update(plaintext) + encyptor.finalize()
     tag = encyptor.tag
     payload_dict = {
         "ciphertext": ciphertext,
