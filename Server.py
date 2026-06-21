@@ -199,10 +199,10 @@ class Node:
 
     async def start_node_as_server(self, port):
         try:
-            self.node = await asyncio.start_server(self.handle_client, '127.0.0.1', port)
-            addr = self.node.sockets[0].getsockname()
-            print(f"Serving on {addr}")
-            print(f"multi-address: ip4/{addr[0]}/tcp/{addr[1]}/p2p/{self.peer_id.hex()}")
+            self.node = await asyncio.start_server(self.handle_client, '', port)
+            print("\nValid multiaddresses:")
+            for i in Helpers.get_valid_ip4_addrs():
+                print(f"multi-address: ip4/{i}/tcp/{port}/p2p/{self.peer_id.hex()}")
 
             async with self.node:
                 await self.node.serve_forever()

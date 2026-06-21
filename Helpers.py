@@ -4,7 +4,17 @@ from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 import os
 import json
 import struct
+import ifaddr
+import ipaddress
 
+def get_valid_ip4_addrs():
+    adapters = ifaddr.get_adapters()
+    ipv4_addrs = []
+    for adapter in adapters:
+        for i in adapter.ips:
+            if i.is_IPv4 and not ipaddress.ip_address(str(i.ip)).is_link_local:
+                ipv4_addrs.append(str(i.ip))
+    return ipv4_addrs
 
 def parse_multiaddr(maddr):
     maddr_info = maddr.split("/")
