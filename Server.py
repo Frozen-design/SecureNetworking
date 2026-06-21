@@ -1,3 +1,6 @@
+from cryptography.hazmat.primitives.asymmetric import ec
+from cryptography.hazmat.primitives import hashes, serialization
+from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 import socket 
 import asyncio
 import upnpclient
@@ -6,10 +9,6 @@ import Helpers
 import os
 import sys
 import re
-from cryptography.hazmat.primitives.asymmetric import ec
-from cryptography.hazmat.primitives import hashes, serialization
-from cryptography.hazmat.primitives.kdf.hkdf import HKDF
-
 
 class Node:
     def __init__(self) -> None:
@@ -131,7 +130,7 @@ class Node:
                 payload = await self.read(reader, AES_key)
                 data = payload.decode("utf-8")
                 if not data or data == '' or data == '\n':
-                    print("\n[DISCONNECTED] Connection closed by the peer.")
+                    print("[DISCONNECTED] Connection closed by the peer.")
                     return
                     #break
                 # Print the chat message received
@@ -158,8 +157,6 @@ class Node:
             return
         except (ConnectionResetError, BrokenPipeError, asyncio.IncompleteReadError):
             print("[DISCONNECTED] Peer disconnected unexpectedly.")
-        finally:
-            print("XD")
 
     def prompt_for_username(self):
         self.username = input("Enter a username: ").strip()
@@ -185,7 +182,7 @@ class Node:
         except ConnectionRefusedError:
             print("[ERROR] Could not connect. Is the server running?")
         finally:
-            print("\n[INFO] Client session ended.")
+            print("[INFO] Client session ended.")
 
     async def handle_client(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter):
         #self.reader, self.writer = reader, writer
