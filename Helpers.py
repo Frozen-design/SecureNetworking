@@ -49,14 +49,14 @@ def payload_to_bytes(payload_dict:dict) -> bytes:
         }
     return json.dumps(payload_hex).encode("utf-8")
 
-def decrypt_aes_256(data:dict, AES_key:bytes) -> str:
+def decrypt_aes_256(data:dict, AES_key:bytes) -> bytes:
     decryptor = Cipher(
         algorithms.AES256(AES_key),
         modes.GCM(data["iv"], data["tag"])
     ).decryptor()
     
     decrypted_text = decryptor.update(data["ciphertext"]) + decryptor.finalize()
-    return decrypted_text.decode()
+    return decrypted_text
 
 def bytes_to_payload(data:bytes) -> dict:
     payload = json.loads(data.decode("utf-8"))

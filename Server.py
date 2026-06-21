@@ -26,32 +26,45 @@ class Node:
     # 3. Verify public key 
     # 4. Create shared secret
 
-    async def write(self, writer:asyncio.StreamWriter, data:bytes):
-        if writer != None:
-            writer.write(Helpers.gen_header(data) + data)
+    async def write(self, writer:asyncio.StreamWriter, data:bytes, AES_key:bytes | None = None)->None:
+        try:
+            if AES_key != None:
+                payload = Helpers.payload_to_bytes(Helpers.encrypt_aes_256(data, AES_key))
+            else:
+                payload = data
+            writer.write(Helpers.gen_header(payload) + payload)
             await writer.drain()
-        else:
-            raise Exception("Writer not initialized")
+        except:
+            pass
 
-    async def read(self, reader:asyncio.StreamReader) -> bytes:
+    async def read(self, reader:asyncio.StreamReader, AES_key:bytes|None = None) -> bytes:
         if reader != None:
-            header = await reader.read(4)
+            try:
+                header = await reader.read(4)
+            except:
+                return b''
+            if len(header) != 4:
+                return b''
             length = Helpers.read_header(header)
             if length == 0:
                 return b''
-            return await reader.read(length)
+            if AES_key != None:
+                return Helpers.decrypt_aes_256(Helpers.bytes_to_payload(await reader.read(length)), AES_key)
+            else:
+                return await reader.read(length)
         else:
             raise Exception("Reader not initialized")
         
     async def end_connection(self, writer: asyncio.StreamWriter, statement:str):
         print(statement)
         print("[INFO] Connection closed")
-        await self.write(writer, b"")
+        #await self.write(writer, b"")
         writer.close()
         try:
             await writer.wait_closed()
+            return None
         except ConnectionError:
-            pass
+            return None
         finally:
             return None
     
@@ -115,17 +128,20 @@ class Node:
         """Continuously reads incoming chat text from the server and prints it."""
         try:
             while True:
-                payload = await self.read(reader)
-                data = Helpers.decrypt_aes_256(Helpers.bytes_to_payload(payload), AES_key)
-                if not data or data == b'' or data == '\n':
-                    print("\n[DISCONNECTED] Connection closed by the server.")
-                    break
+                payload = await self.read(reader, AES_key)
+                data = payload.decode("utf-8")
+                if not data or data == '' or data == '\n':
+                    print("\n[DISCONNECTED] Connection closed by the peer.")
+                    return
+                    #break
                 # Print the chat message received
                 print(data, end='', flush=True)
         except asyncio.CancelledError:
             pass
+        except (ConnectionResetError, BrokenPipeError, asyncio.IncompleteReadError):
+            print("[DISCONNECTED] Peer disconnected unexpectedly.")
 
-    async def send_to_peer(self, writer:asyncio.StreamWriter, AES_key):
+    async def send_to_peer(self, writer:asyncio.StreamWriter, AES_key:bytes):
         """Reads input from local console stdin and ships it out to the server."""
         # Run the blocking loop in an executor so it doesn't freeze the async event loop
         loop = asyncio.get_running_loop()
@@ -137,9 +153,13 @@ class Node:
                 if not line: # EOF / Ctrl+D
                     break
                     
-                await self.write(writer, Helpers.payload_to_bytes(Helpers.encrypt_aes_256((f"[{self.username}]: " + line).encode("utf-8"), AES_key)))
+                await self.write(writer, (f"[{self.username}]: " + line).encode("utf-8"), AES_key)
         except asyncio.CancelledError:
-            pass
+            return
+        except (ConnectionResetError, BrokenPipeError, asyncio.IncompleteReadError):
+            print("[DISCONNECTED] Peer disconnected unexpectedly.")
+        finally:
+            print("XD")
 
     def prompt_for_username(self):
         self.username = input("Enter a username: ").strip()
@@ -151,11 +171,17 @@ class Node:
             print("[CONNECTED] Established link to chat server.")
             # Run both listening and sending coroutines concurrently
             print(f"Welcome {self.username}")
-            await asyncio.gather(
-                self.listen_to_peer(reader, AES_key),
-                self.send_to_peer(writer, AES_key),
-                return_exceptions=False
-            )
+
+            listener = asyncio.create_task(self.listen_to_peer(reader, AES_key))
+            sender = asyncio.create_task(self.send_to_peer(writer, AES_key))
+
+            done, pending = await asyncio.wait({listener, sender}, return_when=asyncio.FIRST_COMPLETED)
+
+            for task in pending:
+                task.cancel()
+
+            await asyncio.gather(*pending, return_exceptions=True)
+            
         except ConnectionRefusedError:
             print("[ERROR] Could not connect. Is the server running?")
         finally:
@@ -204,7 +230,8 @@ class Node:
         except ConnectionError as e:
             print(f"Network error occurred: {e}")
         finally:
-            return await self.end_connection(writer, "Connection closing")
+            await self.end_connection(writer, "Connection closing")
+            return
 
 def get_local_ip():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -260,6 +287,7 @@ async def create_node(port:int, destination:str):
     else:
         maddr_info = Helpers.parse_multiaddr(destination)
         await node.start_node_as_client(maddr_info[1], int(maddr_info[3]))
+        return
 
 
 def main():
